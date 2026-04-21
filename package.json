@@ -1,8 +1,9 @@
 {
-  "name": "my-awesome-api",
+  "name": "my-test-api",
   "version": "1.0.0",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "dependencies": {}
 }
