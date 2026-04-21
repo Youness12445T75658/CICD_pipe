@@ -1,22 +1,26 @@
 # ÉTAPE 1 : Build
 FROM node:20-alpine AS build
 WORKDIR /app
+# On copie les fichiers de config
 COPY package*.json ./
 RUN npm install
+# On copie tout le reste du code qui est à la racine
 COPY . .
 
-# ÉTAPE 2 : Runtime (Image finale)
+# ÉTAPE 2 : Image finale (Runtime)
 FROM node:20-alpine
 WORKDIR /app
-# On ne copie que les fichiers nécessaires de l'étape de build
-COPY --from=build /app/package*.json ./
+
+# On récupère les dossiers essentiels du build
 COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/src ./src 
+COPY --from=build /app/package*.json ./
+# On copie tous les fichiers de l'étape build vers ici
+COPY --from=build /app ./
 
-HEALTHCHECK --interval=30s --timeout=3s \
-  CMD wget --quiet --tries=1 --spider http://localhost:3000/ || exit 1
-
+# Sécurité : on utilise l'utilisateur 'node' déjà présent dans l'image alpine
 USER node
+
+EXPOSE 3000
 CMD ["npm", "start"]
 
 
