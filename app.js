@@ -1,10 +1,21 @@
+// La liste de tes accessoires
 const products = [
-    { id: 1, name: "Coque iPhone 15", price: 20 },
-    { id: 2, name: "Chargeur Rapide", price: 30 }
+    { name: "Coque Silicone iPhone", price: "19.99€", img: "📱" },
+    { name: "Chargeur Rapide USB-C", price: "25.00€", img: "⚡" },
+    { name: "Protection Écran Verre", price: "10.00€", img: "💎" }
 ];
 
-function applyDiscount(price, discount) {
-    return price - (price * discount / 100);
-}
+// La fonction qui crée les cartes produits dans le HTML
+const productList = document.getElementById('product-list');
 
-module.exports = { applyDiscount, products };
+products.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+        <div style="font-size: 50px;">${product.img}</div>
+        <h3>${product.name}</h3>
+        <p>Prix: ${product.price}</p>
+        <button>Acheter</button>
+    `;
+    productList.appendChild(card);
+});
