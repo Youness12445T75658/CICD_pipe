@@ -1,9 +1,5 @@
-const calculateWeather = require('./app');
+const { applyDiscount } = require('./app');
 
-test('Température haute renvoie Hot', () => {
-  expect(calculateWeather(30)).toBe("Hot");
-});
-
-test('Température basse renvoie Cold', () => {
-  expect(calculateWeather(5)).toBe("Cold");
+test('Applique une remise de 10% sur 20€', () => {
+    expect(applyDiscount(20, 10)).toBe(18);
 });
