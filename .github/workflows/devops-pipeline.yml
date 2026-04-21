@@ -49,3 +49,16 @@ jobs:
           context: 
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-awesome-api:latest
+  deploy-github-pages:
+    needs: quality-check # On ne déploie que si les tests passent !
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+            folder: . # On déploie tout le contenu de la racine
+            branch: gh-pages # GitHub Pages utilisera cette branche automatiquement
