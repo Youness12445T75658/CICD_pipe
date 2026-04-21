@@ -1,9 +1,12 @@
 {
-  "name": "my-test-api",
+  "name": "my-awesome-api",
   "version": "1.0.0",
   "scripts": {
     "start": "node index.js",
     "test": "jest"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
 }
